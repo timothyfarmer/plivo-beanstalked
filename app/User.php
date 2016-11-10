@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\TextMessage;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * A user can have many text messages
+     * @return void
+     */
+    public function textMessages()
+    {
+        return $this->hasMany(TextMessage::class);
+    }
+
+    public function cell_number(){
+        return $this->cell_number;
+    }
 }

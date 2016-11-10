@@ -3,40 +3,43 @@
 namespace App;
 
 use App\Jobs\SendText;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Plivo\RestAPI;
 
 class TextMessage extends Model
 {
-	private $auth_id;
-	private $auth_token;
-	private $from_number;
-	private $to_number;
 	protected $user;
 
-	function __construct(User $user)
+	function __construct()
 	{
-		$this->user = $user;
 		$this->auth_id = env('PLIVO_AUTH_ID');
 		$this->auth_token = env('PLIVO_AUTH_TOKEN');
-		$this->to_number = $user->cell_number;
 	}
 
-    public function store(TextMessage $message)
+    public function store()
     {
-
-    	dispatch(new SendText($message));
+    	dispatch((new SendText($this))->delay(60*5));
     }
 
-    public function send(TextMessage $message)
+    public function send()
     {
-    	// $api = new RestAPI($auth_id, $auth_token);
-
+        $auth_token = env('PLIVO_AUTH_TOKEN');
+        $auth_id = env('PLIVO_AUTH_ID');
+    	$api = new RestAPI($auth_id, $auth_token);
+        $user = User::where('id',$this->user_id);
+        var_dump($user);
     	// $params = array(
-    	// 	'src' => $message->to_number,
+    	// 	'src' => $to_number,
     	// 	'dst' => $message->from_number,
 
     	// );
-    	Log::info('sending message to number ' . $message->to_number);
+    	Log::info('sending message to number ' . $user->cell_number);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

@@ -22,7 +22,6 @@ class SendText implements ShouldQueue
 
     public function __construct(TextMessage $message)
     {
-        //
         $this->message = $message;
     }
 
