@@ -32,6 +32,7 @@ class SendText implements ShouldQueue
      */
     public function handle()
     {
+        //TODO: need to actually use a Queue here.
         $this->message->send();
     }
 }
