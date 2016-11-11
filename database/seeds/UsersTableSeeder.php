@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
         	'name' => 'tfarmer',
         	'email' => 'tfarmer4@gmail.com',
-        	'password' => bcrypt('secret'),
+        	'password' => Hash::make('password'),
         	'cell_number' => '19403893869'
         ]);
     }
