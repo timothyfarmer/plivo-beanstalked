@@ -10,6 +10,7 @@
        
     </head>
     <body>
+        @yield('nav')
         <div class="container">
         <div class="row">
             @if (Session::has('notif'))

@@ -15,14 +15,19 @@ use Pheanstalk\Pheanstalk;
 |
 */
 
+
+
+Route::get('/', function () {
+	return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
 Route::get('/message', function () {
 	//$message = new TextMessage;
 	$message = App\TextMessage::find(1);
 	$message->store();
 	session()->flash('notif','Message sent');
 	return redirect('/');
-});
-
-Route::get('/', function () {
-	return view('welcome');
-});
+})->middleware('auth:web');
