@@ -19,6 +19,15 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <style type="text/css">
+    #notif {
+        padding: 10px;
+        font-size: 16px;
+    }
+    .glyphicon-remove:hover{
+        text-shadow: -2px -2px #343030;
+    }
+</style>
 </head>
 <body>
     <div id="app">
@@ -83,5 +92,12 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#removeNotification").click(function () {
+                $("#notif").fadeOut("slow");
+            });
+        });
+    </script>
 </body>
 </html>

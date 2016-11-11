@@ -29,5 +29,5 @@ Route::get('/message', function () {
 	$message = App\TextMessage::find(1);
 	$message->store();
 	session()->flash('notif','Message sent');
-	return redirect('/');
+	return redirect('/home');
 })->middleware('auth:web');
