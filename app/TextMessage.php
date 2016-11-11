@@ -20,16 +20,16 @@ class TextMessage extends Model
 
     public function store()
     {
-    	dispatch((new SendText($this))->delay(60*5));
+    	dispatch(new SendText($this));
     }
 
     public function send()
     {
-        $auth_token = env('PLIVO_AUTH_TOKEN');
-        $auth_id = env('PLIVO_AUTH_ID');
-    	$api = new RestAPI($auth_id, $auth_token);
-        $user = User::where('id',$this->user_id);
-        var_dump($user);
+        //$auth_token = env('PLIVO_AUTH_TOKEN');
+        //$auth_id = env('PLIVO_AUTH_ID');
+    	//$api = new RestAPI($auth_id, $auth_token);
+        $user = User::get($this->user)->first();
+        //var_dump($user);
     	// $params = array(
     	// 	'src' => $to_number,
     	// 	'dst' => $message->from_number,

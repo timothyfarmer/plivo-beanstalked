@@ -1,5 +1,10 @@
 <?php
 
+use App\TextMessage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Pheanstalk\Pheanstalk;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +16,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/message', function () {
+	//$message = new TextMessage;
+	$message = App\TextMessage::find(1);
+	$message->store();
+	Session::flash('notif','Message sent');
+	return redirect('/');
+});
 
+Route::get('/', function () {
+	return view('welcome');
 });
