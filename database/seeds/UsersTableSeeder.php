@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         	'name' => 'tfarmer',
         	'email' => 'tfarmer4@gmail.com',
         	'password' => Hash::make('password'),
-        	'cell_number' => '19403893869'
+        	'cell_number' => '18888888888'
         ]);
     }
 }
