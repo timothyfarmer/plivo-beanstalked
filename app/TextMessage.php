@@ -10,12 +10,12 @@ use Plivo\RestAPI;
 
 class TextMessage extends Model
 {
-	protected $user;
+
+    
 
 	function __construct()
 	{
-		$this->auth_id = env('PLIVO_AUTH_ID');
-		$this->auth_token = env('PLIVO_AUTH_TOKEN');
+		
 	}
 
     public function store()
@@ -23,12 +23,12 @@ class TextMessage extends Model
     	dispatch(new SendText($this));
     }
 
-    public function send()
+    public function send(TextMessage $message)
     {
         $auth_token = env('PLIVO_AUTH_TOKEN');
         $auth_id = env('PLIVO_AUTH_ID');
-    	$api = new RestAPI($auth_id, $auth_token);
-        $user = User::get($this->user)->first();
+    	//$api = new RestAPI($auth_id, $auth_token);
+        $user = $this->user;
         //var_dump($user);
     	// $params = array(
     	// 	'src' => $to_number,

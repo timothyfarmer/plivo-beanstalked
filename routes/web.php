@@ -24,10 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/message', function () {
-	//$message = new TextMessage;
-	$message = App\TextMessage::find(1);
-	$message->store();
-	session()->flash('notif','Message sent');
-	return redirect('/home');
-})->middleware('auth:web');
+Route::get('/messages', 'TextMessageController@index')->middleware('auth:web');
+//Route::get('/message/{message}', 'TextMessageController@show')->middleware('auth:web');
+Route::post('/messages/{user}/create', 'TextMessageController@store')->middleware('auth:web');
