@@ -5,6 +5,8 @@ namespace App;
 use App\Jobs\SendText;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Plivo\RestAPI;
 
@@ -20,6 +22,12 @@ class TextMessage extends Model
 
     public function store()
     {
+        DB::table('text_messages')->insert([
+            'user_id' => $this->user_id,
+            'message' => $this->message,
+            'to_number' => $this->to_number,
+            'from_number' => Auth::user()->cell_number,
+        ]);
     	dispatch(new SendText($this));
     }
 

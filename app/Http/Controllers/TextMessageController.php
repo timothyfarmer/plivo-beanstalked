@@ -21,7 +21,9 @@ class TextMessageController extends Controller
 		$message->user_id = $user->id;
 		$message->message = $request->message;
 		$message->to_number = $user->cell_number;
-		return $message;
+		$message->store();
+		session()->flash('notif', 'Message Sent!');
+		return redirect()->back();
 
 	}
 }
