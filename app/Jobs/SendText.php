@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Pheanstalk\Pheanstalk;
 
 class SendText implements ShouldQueue
 {
@@ -32,7 +33,11 @@ class SendText implements ShouldQueue
      */
     public function handle()
     {
-        //TODO: need to actually use a Queue here.
-        $this->message->send();
+        $p = new Pheanstalk('127.0.0.1');
+        $p->useTube('testtube')
+          ->put($this->message->send());
+        $job = $pheanstalk->watch('testtube')
+                          ->reserve();
+        $pheanstalk->delete($job);
     }
 }

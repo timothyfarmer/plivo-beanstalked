@@ -29,6 +29,7 @@ class TextMessage extends Model
             'from_number' => Auth::user()->cell_number,
         ]);
     	dispatch(new SendText($this));
+        Log::info('sending message to number ' . $this->to_number . " with message = " . $this->message);
     }
 
     public function send(TextMessage $message)
