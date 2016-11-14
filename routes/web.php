@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/messages', 'TextMessageController@index')->middleware('auth:web');
+Route::get('/messages', 'TextMessageController@index');
 //Route::get('/message/{message}', 'TextMessageController@show')->middleware('auth:web');
-Route::post('/messages/{user}/create', 'TextMessageController@store')->middleware('auth:web');
+Route::post('/messages/{user}/create', 'TextMessageController@store');
+Route::get('/users/{user}', 'HomeController@show');

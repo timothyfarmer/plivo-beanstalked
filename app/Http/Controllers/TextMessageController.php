@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TextMessageController extends Controller
 {
+	function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function index(){
 		$user = Auth::user();
 		$messages = TextMessage::where('user_id',$user->id)->get();
