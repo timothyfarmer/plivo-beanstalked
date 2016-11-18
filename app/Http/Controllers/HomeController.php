@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        session()->flash('notif', 'Welcome back, ' . Auth::user()->name . '!');
+        //session()->flash('notif', 'Welcome back, ' . Auth::user()->name . '!');
         return view('home');
     }
 

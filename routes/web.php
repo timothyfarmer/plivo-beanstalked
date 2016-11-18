@@ -24,6 +24,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/home/flash', function () {
+	session()->flash('notif', 'Welcome back, ' . Auth::user()->name . "!");
+	return redirect('/home');
+});
 Route::get('/messages', 'TextMessageController@index');
 //Route::get('/message/{message}', 'TextMessageController@show')->middleware('auth:web');
 Route::post('/messages/{user}/create', 'TextMessageController@store');
